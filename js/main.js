@@ -122,6 +122,7 @@
 
     const $toc = $('#toc');
     if ($toc.length > 0) {
+	$toc.addClass('column-left is-sticky');   // 如果目录在左侧则改为 column-left
         const $mask = $('<div>');
         $mask.attr('id', 'toc-mask');
 
