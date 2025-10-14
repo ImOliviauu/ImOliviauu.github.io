@@ -269,7 +269,8 @@
             <div class="rules">
                 <h3>Tips:</h3>
                 <div class="rules-content">
-                    <p>• 每个用户每天只能抽奖一次</p>
+                    <p>• 图片加载可能略慢，可以多等待一会</p>
+                    <p>• 每个用户每天抽奖一次</p>
                     <p>• 抽奖结果仅供娱乐，请勿用于商业用途</p>
                     <p>• 每天凌晨0点重置抽奖次数</p>
                     <p>• 点击"下载图片"保存抽到的角色</p>
@@ -290,6 +291,16 @@
                 name: "Jimmy Page",
                 description: "英国吉他手、作曲家、音乐制作人，齐柏林飞艇乐队创始人与首席吉他手。",
                 image: "https://www.img520.com/EPNGvc.webp"
+            },
+            {
+                name: "Rudolf Franz Karl Joseph",
+                description: "奥匈帝国皇太子，奥匈帝国皇帝弗朗茨·约瑟夫一世和茜茜公主的独子。",
+                image: "https://www.img520.com/Y7mH7n.jpg"
+            },
+            {
+                name: "Elisabeth Amalie Eugenie",
+                description: "茜茜公主，巴伐利亚的伊丽莎白女公爵，奥匈帝国皇帝弗朗茨·约瑟夫一世的妻子。",
+                image: "https://www.img520.com/V82ZS5.jpeg"
             }
 
         ];
@@ -368,8 +379,8 @@
                 localStorage.setItem('lastCharacter', JSON.stringify(selectedCharacter));
                 
                 // 更新状态
-                drawBtn.textContent = '今日已抽奖';
-                drawStatusElement.textContent = "已抽奖";
+                drawBtn.textContent = '今日已嘟嘟';
+                drawStatusElement.textContent = "已嘟嘟";
                 
                 // 隐藏加载动画
                 loading.style.display = 'none';
