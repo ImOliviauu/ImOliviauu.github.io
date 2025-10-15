@@ -124,22 +124,6 @@
             margin-bottom: 16px;
         }
         
-        .stats-info {
-            background: #f7f9fa;
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            color: #536471;
-            text-align: center;
-            border: 1px solid #e1e8ed;
-        }
-        
-        .stats-info .highlight {
-            color: #1d9bf0;
-            font-weight: 700;
-        }
-        
         .action-buttons {
             display: flex;
             gap: 12px;
@@ -253,7 +237,7 @@
     <div class="app-container">
         <header>
             <h1>今日老婆/老公</h1>
-            <p class="subtitle">每日一次，邂逅你的三次元伴侣？</p>
+            <p class="subtitle">每日一次，邂逅你的三次元伴侣？？？诶，只是个抽奖游戏而已。</p>
         </header>
         
         <div class="main-content">
@@ -271,11 +255,6 @@
                     <h2 id="character-name" class="character-name"></h2>
                     <p id="character-description" class="character-description"></p>
                     
-                    <!-- 新增统计信息区域 -->
-                    <div id="stats-info" class="stats-info">
-                        今天有 <span id="stats-count" class="highlight">0</span> 个人也嘟到了 <span id="stats-character-name" class="highlight"></span>
-                    </div>
-                    
                     <div class="action-buttons">
                         <a id="download-btn" class="action-btn" href="#" download="character.png">下载图片</a>
                         <button id="share-btn" class="action-btn">分享结果</button>
@@ -290,23 +269,24 @@
             <div class="rules">
                 <h3>Tips:</h3>
                 <div class="rules-content">
-                    <p>• 图片加载可能略慢，可以多等待一会</p>
-                    <p>• 每个用户每天抽奖一次</p>
-                    <p>• 抽奖结果仅供娱乐，请勿用于商业用途</p>
+                    <p>• 图片加载可能有点慢，请耐心等待哦！</p>
+                    <p>• 本网页仅供娱乐，不得涉及商业用途！</p>
                 </div>
                 <h3>Contributors:</h3>
                 <div class="rules-content">
                     <p>• 没有脑袋的松鼠先生</p>
-                    <p>• 干叶玫瑰</p>
                     <p>• Icarus</p>
                 </div>
+
             </div>
         </div>
         
         <footer>
-            <p>© 2025 今日老婆/老公 | From Noinit</p>
+            <p>© 2025 嘟嘟嘟！| From NoinT (AKA Olivia_uu)</p>
         </footer>
     </div>
+
+    <script id="_waubb0">var _wau = _wau || []; _wau.push(["dynamic", "16pzsj1a5r", "bb0", "689da7ffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
 
     <script>
         // 角色数据 - 使用高清图片URL
@@ -348,62 +328,6 @@
         const drawStatusElement = document.getElementById('draw-status');
         const downloadBtn = document.getElementById('download-btn');
         const shareBtn = document.getElementById('share-btn');
-        const statsInfo = document.getElementById('stats-info');
-        const statsCount = document.getElementById('stats-count');
-        const statsCharacterName = document.getElementById('stats-character-name');
-        
-        // 获取今日日期字符串
-        function getTodayString() {
-            return new Date().toISOString().split('T')[0];
-        }
-        
-        // 初始化统计数据
-        function initStats() {
-            const today = getTodayString();
-            const stats = localStorage.getItem(`stats_${today}`);
-            
-            if (!stats) {
-                // 如果今天还没有统计数据，初始化所有角色计数为0
-                const initialStats = {};
-                characters.forEach(character => {
-                    initialStats[character.name] = 0;
-                });
-                localStorage.setItem(`stats_${today}`, JSON.stringify(initialStats));
-                return initialStats;
-            }
-            
-            return JSON.parse(stats);
-        }
-        
-        // 更新统计数据
-        function updateStats(characterName) {
-            const today = getTodayString();
-            const stats = JSON.parse(localStorage.getItem(`stats_${today}`)) || {};
-            
-            if (stats[characterName] !== undefined) {
-                stats[characterName]++;
-            } else {
-                stats[characterName] = 1;
-            }
-            
-            localStorage.setItem(`stats_${today}`, JSON.stringify(stats));
-            return stats;
-        }
-        
-        // 获取角色统计信息
-        function getCharacterStats(characterName) {
-            const today = getTodayString();
-            const stats = JSON.parse(localStorage.getItem(`stats_${today}`)) || {};
-            return stats[characterName] || 0;
-        }
-        
-        // 显示统计信息
-        function showStats(characterName) {
-            const count = getCharacterStats(characterName);
-            statsCount.textContent = count;
-            statsCharacterName.textContent = characterName;
-            statsInfo.style.display = 'block';
-        }
         
         // 检查今天是否已经抽过奖
         function hasDrawnToday() {
@@ -415,9 +339,6 @@
         
         // 初始化页面
         function initPage() {
-            // 初始化统计数据
-            initStats();
-            
             if (hasDrawnToday()) {
                 drawBtn.disabled = true;
                 drawBtn.textContent = '今日已嘟嘟';
@@ -433,9 +354,6 @@
                     characterDescription.textContent = character.description;
                     downloadBtn.href = character.image;
                     resultSection.style.display = 'block';
-                    
-                    // 显示统计信息
-                    showStats(character.name);
                 }
             } else {
                 drawStatusElement.textContent = "未嘟嘟";
@@ -473,15 +391,9 @@
                 localStorage.setItem('lastDrawDate', today);
                 localStorage.setItem('lastCharacter', JSON.stringify(selectedCharacter));
                 
-                // 更新统计数据
-                updateStats(selectedCharacter.name);
-                
-                // 显示统计信息
-                showStats(selectedCharacter.name);
-                
                 // 更新状态
-                drawBtn.textContent = '今日已嘟嘟';
-                drawStatusElement.textContent = "已嘟嘟";
+                drawBtn.textContent = '今日已抽奖';
+                drawStatusElement.textContent = "已抽奖";
                 
                 // 隐藏加载动画
                 loading.style.display = 'none';
